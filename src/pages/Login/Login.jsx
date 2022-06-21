@@ -29,18 +29,18 @@ const Login = () => {
       auth.setIsAuthenticated(true);
       auth.setToken(data.token);
     }
-  }, [data]);
+  }, [data, auth, navigate]);
   return (
     <div
       style={{ height: "100vh" }}
       className="container w-100 d-flex justify-content-center align-items-stretch text-center flex-column"
     >
       <h1 className="my-5">Connexion</h1>
-      <Formik
-        initialValues={formik.initialValues}
-        onSubmit={formik.handleSubmit}
-      >
-        <Form className="my-5 w-50 mx-auto d-flex flex-column text-start">
+      <Formik initialValues={formik.initialValues}>
+        <Form
+          onSubmit={formik.handleSubmit}
+          className="my-5 w-50 mx-auto d-flex flex-column text-start"
+        >
           <label className="mt-5" htmlFor="email">
             Email
           </label>
@@ -64,9 +64,9 @@ const Login = () => {
             value={formik.values.password}
             onChange={formik.handleChange}
           />
-          <NavLink to="/sign-up">
-            <li className="d-inline-block m-3 color-primary">
-              Pas encore inscrit? Cliquez ici pour créer un compte.
+          <NavLink to="/sign-up" className="text-center">
+            <li className="d-inline-block m-3 color-primary ">
+              Pas encore inscrit? Je crée mon compte.
             </li>
           </NavLink>
 

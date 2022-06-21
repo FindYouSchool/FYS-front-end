@@ -6,6 +6,7 @@ import Providers from "./contexts/Providers";
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const NotFound = React.lazy(() => import("./pages/404/NotFound"));
+const SignUp = React.lazy(() => import("./pages/SignUp/SignUp"));
 //COMPONENTS
 const Menu = React.lazy(() => import("./components/Menu/Menu"));
 const Loader = React.lazy(() => import("./components/Loader/Loader"));
@@ -14,14 +15,17 @@ function App() {
   return (
     <div className="App">
       <Providers>
-        <Suspense fallback={<Loader size="large" />}>
+        <>
           <Menu />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+          <Suspense fallback={<Loader size="large" />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/Login" element={<Login />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </>
       </Providers>
     </div>
   );
