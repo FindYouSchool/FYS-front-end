@@ -7,7 +7,10 @@ const Loader = (props) => {
     xl: "4rem",
   };
   return (
-    <div className="container d-flex w-100 justify-content-center align-items-center">
+    <div
+      style={{ marginTop: "10%" }}
+      className="container d-flex w-100 justify-content-center align-items-center"
+    >
       <div
         style={{ width: size[props.size], height: size[props.size] }}
         className="spinner-grow text-primary m-5"

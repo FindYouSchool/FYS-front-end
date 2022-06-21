@@ -5,7 +5,6 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
   width: 100%;
   min-height: 70px;
   padding: 1rem;
@@ -42,7 +41,7 @@
   box-shadow: inset calc(120px + 0.5rem) 0 0 #fff;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 800px) {
   .navbar-links {
     display: flex;
     flex-direction: column;
