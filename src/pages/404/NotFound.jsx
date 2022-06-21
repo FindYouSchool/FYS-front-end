@@ -11,7 +11,7 @@ const NotFound = () => {
       <h1>404</h1>
       <h2>
         Page
-        <span style={{ color: "red" }}>{location.pathname}</span> introuvable
+        <span style={{ color: "red" }}> {location.pathname}</span> introuvable
       </h2>
     </div>
   );

@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Avatar from "../Avatar/Avatar";
 import "./menu.css";
 
 const Menu = () => {
+  const { isAuthenticated } = useAuth();
   const [showLinks, setShowlinks] = useState(false);
+  const navigate = useNavigate();
+
   const handleShowLinks = () => {
     setShowlinks(!showLinks);
   };
@@ -37,13 +43,25 @@ const Menu = () => {
         >
           Donner son avis
         </NavLink>
-        <NavLink
-          to="/login"
-          onClick={handleClick}
-          className="navbar-link d-inline-block mx-3"
-        >
-          Se connecter
-        </NavLink>
+        {isAuthenticated ? (
+          <Avatar
+            size={30}
+            containerStyle="avatar-container"
+            className="avatar-opened-nav"
+            onClick={() => {
+              handleClick();
+              navigate("/profile");
+            }}
+          />
+        ) : (
+          <NavLink
+            to="/login"
+            onClick={handleClick}
+            className="navbar-link d-inline-block mx-3"
+          >
+            Se connecter
+          </NavLink>
+        )}
       </ul>
       <button className="navbar-burger" onClick={handleShowLinks}>
         <span className="burger-bar"></span>

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, useFormik } from "formik";
 import { useLogin } from "../../queries/auth.query";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
   const [credentials, setCredentials] = useState();
+  const auth = useAuth();
   const { data, refetch } = useLogin(credentials);
   const navigate = useNavigate();
 
@@ -17,14 +19,17 @@ const Login = () => {
     onSubmit: (values) => {
       setCredentials(values);
       refetch(values);
-      console.log("Values : " + values);
     },
   });
   console.log(data);
 
-  if (data && data.status) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (data && data.status) {
+      navigate("/");
+      auth.setIsAuthenticated(true);
+      auth.setToken(data.token);
+    }
+  }, [data]);
   return (
     <div
       style={{ height: "100vh" }}
