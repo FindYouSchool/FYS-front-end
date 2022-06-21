@@ -7,7 +7,7 @@
     width: 100%;
     min-height: 70px;
     padding: 1rem;
-    background-color: rgb(53, 53, 176);
+    background-color: rgb(102, 102, 177);
     color: rgb(249, 246, 246);
 }
 .navbar-links{
@@ -25,6 +25,21 @@
    color: inherit;
    display: none;
 }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200');
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
 @media screen and (max-width:767px){
     .navbar-links{
         flex-direction: column;
@@ -36,7 +51,7 @@
         height: 100vh;
         padding: 2rem;
         visibility: hidden;
-        background-color: rgb(53, 53, 176);
+        background-color: rgb(102, 102, 177);
     }
     .show-nav
     .navbar-links{
