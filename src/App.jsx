@@ -14,16 +14,14 @@ function App() {
   return (
     <div className="App">
       <Providers>
-        <Menu />
-        <div className="container">
-          <Suspense fallback={<Loader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/Login" element={<Login />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </div>
+        <Suspense fallback={<Loader size="large" />}>
+          <Menu />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </Providers>
     </div>
   );

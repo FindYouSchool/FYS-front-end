@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200");
+
 .menu-container {
   display: flex;
   flex-wrap: wrap;
@@ -7,7 +9,7 @@
   width: 100%;
   min-height: 70px;
   padding: 1rem;
-  background-color: rgb(102, 102, 177);
+  background-color: #364887;
   color: rgb(249, 246, 246);
 }
 .navbar-burger {
@@ -18,32 +20,61 @@
   color: inherit;
   display: none;
 }
-.items {
-  display: inline-block;
+
+.navbar-link {
+  box-shadow: inset 0 0 0 0 #36478700;
+  color: white;
+  transition: color 0.3s ease-in-out, box-shadow 0.4s ease-in-out;
+  text-align: center;
+  padding: 0.5rem;
 }
-@media screen and (max-width: 767px) {
+.navbar-link:hover {
+  color: #364887;
+  box-shadow: inset calc(120px + 0.5rem) 0 0 #fff;
+}
+
+@media screen and (max-width: 780px) {
   .navbar-links {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    right: -100vw;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
     bottom: 0;
     height: 100vh;
     padding: 2rem;
     visibility: hidden;
-    background-color: #364887;
-  }
-  .show-nav .navbar-links {
-    width: 100vw;
-    right: 0;
-    visibility: visible;
+    transition: background-color 0.3s ease-in-out;
   }
   .navbar-link {
     display: block;
-    padding: 1.5rem;
+    box-shadow: inset 0 0 0 0 #36478700;
+    text-align: center;
+    width: 50vmin;
+    margin: 1.5rem 0;
+    padding: 0rem 1.5rem;
     font-size: 5vw;
+    color: white;
   }
+  .navbar-link:hover {
+    box-shadow: inset 50vmin 0 0 0 #fff !important;
+    color: #364787;
+  }
+  .show-nav .navbar-links {
+    width: 100vw;
+    background-color: #364787e7;
+    visibility: visible;
+  }
+  .hide-nav .navbar-links {
+    width: 0;
+    background-color: transparent;
+    visibility: hidden;
+  }
+  /* BURGER MENU */
+
   .navbar-burger {
     display: block;
     position: fixed;
@@ -87,84 +118,19 @@
     transform: rotate(-45deg);
   }
 }
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200");
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  outline: none;
-}
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-a {
-  text-decoration: none;
-}
-@media screen and (max-width: 767px) {
+
+@media screen and (max-width: 350px) {
   .navbar-links {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    right: -100vw;
-    bottom: 0;
-    height: 100vh;
-    padding: 2rem;
-    visibility: hidden;
-    background-color: rgb(102, 102, 177);
-  }
-  .show-nav .navbar-links {
-    width: 100vw;
-    right: 0;
-    visibility: visible;
+    padding: 1.5rem;
   }
   .navbar-link {
-    display: block;
-    padding: 1.5rem;
-    font-size: 5vw;
+    /* margin: auto;
+    margin: 1rem 0;
+    padding: 0.5rem 1.5rem; */
+    font-size: 1.5rem;
+    width: 100%;
   }
-  .navbar-burger {
-    display: block;
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-  }
-  .navbar-burger:hover {
-    cursor: pointer;
-  }
-  .burger-bar,
-  .burger-bar::before,
-  .burger-bar::after {
-    display: block;
-    width: 40px;
-    height: 3px;
-    position: relative;
-    border-radius: 3px;
-    background: #fff;
-    transition: all 0.5s ease-in-out;
-  }
-  .burger-bar::before,
-  .burger-bar::after {
-    content: "";
-    position: absolute;
-    left: 0;
-  }
-  .burger-bar::before {
-    transform: translateY(-12px);
-  }
-  .burger-bar::after {
-    transform: translateY(12px);
-  }
-  .show-nav .burger-bar {
-    width: 0;
-    background: transparent;
-  }
-  .show-nav .burger-bar::before {
-    transform: rotate(45deg);
-  }
-  .show-nav .burger-bar::after {
-    transform: rotate(-45deg);
+  .navbar-link:hover {
+    box-shadow: inset calc(90vw - 3rem) 0 0 0 #fff !important;
   }
 }

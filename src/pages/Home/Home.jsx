@@ -1,10 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const navigate = useNavigate();
   return (
-    <div style={{ height: "1500px" }}>
+    <div style={{ height: "auto" }}>
       <h1>Welcome to the homepage!</h1>
     </div>
   );
