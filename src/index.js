@@ -4,7 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 
 // STYLES
 import "bootstrap/dist/css/bootstrap.css";
-import "./styles/_reset.css";
+import "./styles/index.css";
 // COMPONENTS
 import App from "./App";
 
