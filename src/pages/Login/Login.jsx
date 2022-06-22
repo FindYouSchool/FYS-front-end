@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, useFormik } from "formik";
 import { useLogin } from "../../queries/auth.query";
-import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
@@ -21,7 +20,6 @@ const Login = () => {
       refetch(values);
     },
   });
-  console.log(data);
 
   useEffect(() => {
     if (data && data.status) {

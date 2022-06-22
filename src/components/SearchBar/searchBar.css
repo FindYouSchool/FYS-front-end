@@ -3,6 +3,7 @@
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.26);
   border-radius: 8px;
   display: flex;
+  animation: slide 1s forwards;
 }
 .searchbar-input {
   max-width: 500px;
@@ -22,4 +23,14 @@
   text-align: center;
   background-color: #131161;
   color: white;
+}
+
+@keyframes slide {
+  from {
+    margin-bottom: 30px;
+  }
+
+  to {
+    margin-bottom: 0;
+  }
 }
