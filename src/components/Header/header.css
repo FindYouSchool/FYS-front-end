@@ -1,0 +1,31 @@
+.header-container {
+  width: 100%;
+  height: 50vh;
+  max-height: 400px;
+  text-align: center;
+  color: white;
+  background-image: url("../../assets/header.png");
+  background-size: cover;
+}
+.header-overlay {
+  background: rgba(54, 72, 135, 0.5);
+  width: 100%;
+  height: 50vh;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.header-title {
+  font-family: "Aclonica", sans-serif;
+  color: white;
+  font-size: calc(2vw + 1.5em);
+}
+
+.header-overlay > p {
+  font-family: "Roboto" sans-serif;
+  font-size: calc(0.5vw + 1rem);
+}
