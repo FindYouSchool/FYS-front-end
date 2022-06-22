@@ -18,9 +18,14 @@ const Menu = () => {
       setShowlinks(false);
     }
   };
+  const goHome = () => {
+    navigate("/");
+  };
   return (
     <nav className={`menu-container ${showLinks ? "show-nav" : "hide-nav"} `}>
-      <div className="logo-container fw-bold ">Logo</div>
+      <div onClick={goHome} className="logo-container">
+        <span>FYS</span>
+      </div>
       <ul className="navbar-links">
         <NavLink
           to="/"
