@@ -1,0 +1,25 @@
+.searchbar-container {
+  position: relative;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.26);
+  border-radius: 8px;
+  display: flex;
+}
+.searchbar-input {
+  max-width: 500px;
+  width: 50vw;
+  height: 50px;
+  border-radius: 8px 0 0 8px;
+  border: none;
+  padding: 0.5rem 0.7rem;
+  flex: 1;
+}
+.searchbar-btn {
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  height: 50px;
+  line-height: 10px;
+  text-align: center;
+  background-color: #131161;
+  color: white;
+}

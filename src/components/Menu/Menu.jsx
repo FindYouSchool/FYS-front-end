@@ -18,9 +18,14 @@ const Menu = () => {
       setShowlinks(false);
     }
   };
+  const goHome = () => {
+    navigate("/");
+  };
   return (
     <nav className={`menu-container ${showLinks ? "show-nav" : "hide-nav"} `}>
-      <div className="logo-container fw-bold ">Logo</div>
+      <div onClick={goHome} className="logo-container">
+        <span>FYS</span>
+      </div>
       <ul className="navbar-links">
         <NavLink
           to="/"
@@ -34,33 +39,42 @@ const Menu = () => {
           onClick={handleClick}
           className="navbar-link d-inline-block mx-3"
         >
-          Ecoles
+          Écoles
         </NavLink>
         <NavLink
           to="/notice"
           onClick={handleClick}
           className="navbar-link d-inline-block mx-3"
         >
-          Donner son avis
+          Donner un avis
         </NavLink>
         {isAuthenticated ? (
           <Avatar
             size={30}
             containerStyle="avatar-container"
-            className="avatar-opened-nav"
+            className="avatar-opened-nav mx-5"
             onClick={() => {
               handleClick();
               navigate("/profile");
             }}
           />
         ) : (
-          <NavLink
-            to="/login"
-            onClick={handleClick}
-            className="navbar-link d-inline-block mx-3"
-          >
-            Se connecter
-          </NavLink>
+          <div className="menu-login-container">
+            <NavLink
+              to="/login"
+              onClick={handleClick}
+              className="btn btn-light "
+            >
+              Se connecter
+            </NavLink>
+            <NavLink
+              to="/sign-up"
+              onClick={handleClick}
+              className="btn btn-primary mx-2"
+            >
+              S'inscrire
+            </NavLink>
+          </div>
         )}
       </ul>
       <button className="navbar-burger" onClick={handleShowLinks}>

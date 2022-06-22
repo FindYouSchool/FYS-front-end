@@ -13,7 +13,7 @@ const Loader = (props) => {
     >
       <div
         style={{ width: size[props.size], height: size[props.size] }}
-        className="spinner-grow text-primary m-5"
+        className="spinner-border text-primary m-5"
         role="status"
       >
         <span className="visually-hidden">Loading...</span>

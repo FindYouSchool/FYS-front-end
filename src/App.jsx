@@ -1,15 +1,15 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Providers from "./contexts/Providers";
 
 // PAGES
-const Home = React.lazy(() => import("./pages/Home/Home"));
-const Login = React.lazy(() => import("./pages/Login/Login"));
-const NotFound = React.lazy(() => import("./pages/404/NotFound"));
-const SignUp = React.lazy(() => import("./pages/SignUp/SignUp"));
+const Home = lazy(() => import("./pages/Home/Home"));
+const Login = lazy(() => import("./pages/Login/Login"));
+const NotFound = lazy(() => import("./pages/404/NotFound"));
+const SignUp = lazy(() => import("./pages/SignUp/SignUp"));
 //COMPONENTS
-const Menu = React.lazy(() => import("./components/Menu/Menu"));
-const Loader = React.lazy(() => import("./components/Loader/Loader"));
+const Menu = lazy(() => import("./components/Menu/Menu"));
+const Loader = lazy(() => import("./components/Loader/Loader"));
 
 function App() {
   return (
