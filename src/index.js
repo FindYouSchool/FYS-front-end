@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 // STYLES
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles/index.css";
+import "react-toastify/dist/ReactToastify.css";
 // COMPONENTS
 import App from "./App";
 
