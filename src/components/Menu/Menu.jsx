@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 import "./Menu.css";
 
@@ -9,7 +9,7 @@ const Menu = () => {
   const { isAuthenticated } = useAuth();
   const [showLinks, setShowlinks] = useState(false);
   const navigate = useNavigate();
-
+  const location = useLocation();
   const handleShowLinks = () => {
     setShowlinks(!showLinks);
   };
@@ -60,20 +60,24 @@ const Menu = () => {
           />
         ) : (
           <div className="menu-login-container">
-            <NavLink
-              to="/login"
-              onClick={handleClick}
+            <button
+              onClick={() => {
+                handleClick();
+                navigate("/login", { state: { from: location.pathname } });
+              }}
               className="btn btn-light "
             >
               Se connecter
-            </NavLink>
-            <NavLink
-              to="/sign-up"
-              onClick={handleClick}
+            </button>
+            <button
+              onClick={() => {
+                navigate("/sign-up", { state: { from: location.pathname } });
+                handleClick();
+              }}
               className="btn btn-primary mx-2"
             >
               S'inscrire
-            </NavLink>
+            </button>
           </div>
         )}
       </ul>

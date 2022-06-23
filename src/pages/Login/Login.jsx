@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, useFormik } from "formik";
 import { useLogin } from "../../queries/auth.query";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
-const Login = () => {
-  const [credentials, setCredentials] = useState();
+const Login = (props) => {
+  // const [credentials, setCredentials] = useState();
   const auth = useAuth();
-  const { data, refetch } = useLogin(credentials);
+  const { data, refetch } = useLogin();
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const from = location.state?.from || "/";
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (values) => {
-      setCredentials(values);
+      // setCredentials(values);
       refetch(values);
     },
   });
 
   useEffect(() => {
     if (data && data.status) {
-      navigate("/");
       auth.setIsAuthenticated(true);
       auth.setToken(data.token);
+      navigate(from, { replace: true });
     }
-  }, [data, auth, navigate]);
+  }, [data, auth, navigate, from]);
   return (
     <div
       style={{ height: "100vh" }}

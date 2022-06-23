@@ -3,20 +3,21 @@ import { Formik, Form, useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 
 import "./signup.css";
+import { useSignUp } from "../../queries/auth.query";
 
 const SignUp = () => {
-  // const [userInfo, setUserInfo] = useState();
-
+  const { refetch } = useSignUp();
   const formik = useFormik({
     initialValues: {
       email: "",
-      lastname: "",
-      firstname: "",
       password: "",
+      username: "",
     },
     onSubmit: (values) => {
       console.log(values);
-      // setUserInfo(values);
+      refetch(values).then((res) => {
+        // setCurrentUser();
+      });
     },
   });
   return (
@@ -43,25 +44,14 @@ const SignUp = () => {
             onChange={formik.handleChange}
           />
           <label className="mt-5" htmlFor="email">
-            Nom
+            Nom d'utilisateur
           </label>
           <input
             required
             className="form-control m-auto"
-            id="lastname"
-            placeholder="Entrer votre nom"
-            value={formik.values.lastname}
-            onChange={formik.handleChange}
-          />
-          <label className="mt-5" htmlFor="email">
-            Prénom
-          </label>
-          <input
-            required
-            className="form-control m-auto"
-            id="firstname"
-            placeholder="Entrer votre prénom"
-            value={formik.values.firstname}
+            id="username"
+            placeholder="Entrer un pseudo"
+            value={formik.values.username}
             onChange={formik.handleChange}
           />
 
