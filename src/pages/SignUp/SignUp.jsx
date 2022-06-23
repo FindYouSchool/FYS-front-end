@@ -1,93 +1,104 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, useFormik } from "formik";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { toast } from "react-toastify";
 import "./signup.css";
+import { useSignUp } from "../../queries/auth/auth.query";
+import { useAuth } from "../../contexts/AuthContext";
+import InputField from "../../components/InputField/InputField";
+
+// VALIDATION
+const SignupSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("L'adresse saisie est invalide.")
+    .required("Veuillz saisir votre adresse mail."),
+  username: Yup.string()
+    .min(5, "Veuillez saisir au moins 5 caractères.")
+    .max(50, "Veuillez saisir maximum 50 caractères.")
+    .required("Veuillz saisir votre nom d'utilisateur."),
+  password: Yup.string()
+    .min(5, "Veuillez saisir au moins 5 caractères.")
+    .max(50, "Veuillez saisir maximum 50 caractères.")
+    .required("Veuillz saisir un mot de passe."),
+  passwordConfirmation: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Le mot de passe de confirmation ne correspond pas."
+  ),
+});
 
 const SignUp = () => {
-  // const [userInfo, setUserInfo] = useState();
+  const { refetch, isError, error } = useSignUp();
+  const { setUserInfo, setIsAuthenticated, setToken } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(error);
+    if (isError) {
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }, [isError, error]);
 
   const formik = useFormik({
     initialValues: {
       email: "",
-      lastname: "",
-      firstname: "",
+      username: "",
       password: "",
+      passwordConfirmation: "",
     },
     onSubmit: (values) => {
-      console.log(values);
-      // setUserInfo(values);
+      refetch(values)
+        .then(({ data }) => {
+          if (data && data.data.user) {
+            setUserInfo({ ...data.data.user, roles: [1155] });
+            setToken(data.data.accessToken);
+            setIsAuthenticated(true);
+            navigate("/profile");
+          }
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
     },
   });
   return (
-    <div
-      style={{ height: "100vh" }}
-      className="container w-100 d-flex justify-content-center align-items-stretch text-center flex-column"
-    >
-      <h1 className="">Créer un compte</h1>
+    <div className="container mt-5 pt-5 w-100 d-flex justify-content-center align-items-stretch text-center flex-column">
+      <h1>Créer un compte</h1>
       <Formik
         initialValues={formik.initialValues}
         onSubmit={formik.handleSubmit}
+        validationSchema={SignupSchema}
       >
-        <Form className="my-5 w-50 mx-auto d-flex flex-column text-start">
-          <label className="mt-5" htmlFor="email">
-            Email
-          </label>
-          <input
-            required
-            type="email"
-            className="form-control m-auto"
-            id="email"
+        <Form className="my-3 w-50 mx-auto d-flex flex-column text-start">
+          <InputField
             placeholder="name@example.com"
-            value={formik.values.email}
-            onChange={formik.handleChange}
+            name="email"
+            label="Email"
           />
-          <label className="mt-5" htmlFor="email">
-            Nom
-          </label>
-          <input
-            required
-            className="form-control m-auto"
-            id="lastname"
-            placeholder="Entrer votre nom"
-            value={formik.values.lastname}
-            onChange={formik.handleChange}
+          <InputField
+            name="username"
+            placeholder="Entrer un pseudo"
+            label=" Nom d'utilisateur"
           />
-          <label className="mt-5" htmlFor="email">
-            Prénom
-          </label>
-          <input
-            required
-            className="form-control m-auto"
-            id="firstname"
-            placeholder="Entrer votre prénom"
-            value={formik.values.firstname}
-            onChange={formik.handleChange}
-          />
-
-          <label className="mt-5" htmlFor="password">
-            Mot de passe
-          </label>
-          <input
-            required
-            type="password"
-            className="form-control  m-auto"
-            id="password"
+          <InputField
             placeholder="*******"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-          />
-          <label className="mt-5" htmlFor="password">
-            Confirmer votre mot de passe{" "}
-          </label>
-          <input
-            required
+            name="password"
+            label="Mot de passe"
             type="password"
-            className="form-control  m-auto"
-            id="confirm-password"
+          />
+          <InputField
             placeholder="*******"
-            value={formik.values.password}
-            onChange={formik.handleChange}
+            name="passwordConfirmation"
+            label="Confirmer votre mot de passe"
+            type="password"
           />
           <NavLink to="/login" className="text-center">
             <li className="d-inline-block m-3 color-primary ">

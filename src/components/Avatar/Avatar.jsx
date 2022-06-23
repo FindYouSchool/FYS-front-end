@@ -3,13 +3,12 @@ import { useAuth } from "../../contexts/AuthContext";
 import "./Avatar.css";
 
 const Avatar = ({ size, className, containerStyle, onClick }) => {
-  console.log(size, className);
   const [sizes, setSizes] = useState(30);
   const [style, setStyle] = useState("");
-  const { currentUser } = useAuth();
-  let url = currentUser.avatar;
+  const { userInfo } = useAuth();
+  let url = userInfo.avatar;
   if (!url) {
-    url = `https://ui-avatars.com/api/?background=F5F5F5&name=${currentUser.username}`;
+    url = `https://ui-avatars.com/api/?background=F5F5F5&name=${userInfo.username}`;
   }
   useEffect(() => {
     setSizes(size);

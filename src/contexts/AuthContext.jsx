@@ -3,13 +3,17 @@ import React, { useContext, useState } from "react";
 const AUTH_DEFAULT = {
   isAuthenticated: false,
   token: null,
-  currentUser: {
-    id: "",
-    name: "string",
+  userInfo: {
+    id: null,
+    username: null,
+    avatar: null,
+    email: null,
+    roles: [1155, 1166],
   },
-  setCurrentUser: () => {},
+  setUserInfo: () => {},
   setIsAuthenticated: () => {},
   setToken: () => {},
+  disconnect: () => {},
 };
 export const AuthContext = React.createContext(AUTH_DEFAULT);
 
@@ -18,7 +22,12 @@ export const AuthProvider = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(
     AUTH_DEFAULT.isAuthenticated
   );
-  const [currentUser, setCurrentUser] = useState(AUTH_DEFAULT.currentUser);
+  const [userInfo, setUserInfo] = useState(AUTH_DEFAULT.userInfo);
+  const disconnect = () => {
+    setToken(null);
+    setUserInfo(null);
+    setIsAuthenticated(false);
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -26,8 +35,9 @@ export const AuthProvider = (props) => {
         setToken,
         isAuthenticated,
         setIsAuthenticated,
-        currentUser,
-        setCurrentUser,
+        userInfo,
+        setUserInfo,
+        disconnect,
       }}
     >
       {props.children}
