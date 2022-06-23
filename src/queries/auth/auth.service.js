@@ -36,7 +36,6 @@ export async function logout() {
       if (!res.status === 200) {
         throw new Error(res.data?.message);
       }
-
       return await res.json();
     })
     .catch((err) => {
