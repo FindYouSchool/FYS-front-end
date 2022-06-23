@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Loader from "../../components/Loader/Loader";
 import { useSearch } from "../../contexts/SearchContext";
-import { useSchools } from "../../queries/schools.query";
+import { useSchools } from "../../queries/schools/schools.query";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "./search.css";

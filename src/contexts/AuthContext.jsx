@@ -13,6 +13,7 @@ const AUTH_DEFAULT = {
   setUserInfo: () => {},
   setIsAuthenticated: () => {},
   setToken: () => {},
+  disconnect: () => {},
 };
 export const AuthContext = React.createContext(AUTH_DEFAULT);
 
@@ -22,6 +23,11 @@ export const AuthProvider = (props) => {
     AUTH_DEFAULT.isAuthenticated
   );
   const [userInfo, setUserInfo] = useState(AUTH_DEFAULT.userInfo);
+  const disconnect = () => {
+    setToken(null);
+    setUserInfo(null);
+    setIsAuthenticated(false);
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -31,6 +37,7 @@ export const AuthProvider = (props) => {
         setIsAuthenticated,
         userInfo,
         setUserInfo,
+        disconnect,
       }}
     >
       {props.children}

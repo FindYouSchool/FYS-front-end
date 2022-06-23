@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
-import Avatar from "../Avatar/Avatar";
 import "./Menu.css";
+
+// Avatar
+import Avatar from "../Avatar/Avatar";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import AvatarPopover from "../Avatar/AvatarPopover";
 
 const Menu = () => {
   const { isAuthenticated } = useAuth();
   const [showLinks, setShowlinks] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const ref = React.createRef();
   const handleShowLinks = () => {
     setShowlinks(!showLinks);
   };
@@ -18,12 +23,10 @@ const Menu = () => {
       setShowlinks(false);
     }
   };
-  const goHome = () => {
-    navigate("/");
-  };
+
   return (
     <nav className={`menu-container ${showLinks ? "show-nav" : "hide-nav"} `}>
-      <div onClick={goHome} className="logo-container">
+      <div onClick={() => navigate("/")} className="logo-container">
         <span>FYS</span>
       </div>
       <ul className="navbar-links">
@@ -49,15 +52,33 @@ const Menu = () => {
           Donner un avis
         </NavLink>
         {isAuthenticated ? (
-          <Avatar
-            size={30}
-            containerStyle="avatar-container"
-            className="avatar-opened-nav mx-5"
-            onClick={() => {
-              handleClick();
-              navigate("/profile");
-            }}
-          />
+          <div style={{ position: "relative" }}>
+            <OverlayTrigger
+              placement="bottom"
+              trigger="click"
+              overlay={<AvatarPopover />}
+            >
+              <button
+                style={{
+                  margin: 0,
+                  padding: 0,
+                  border: "none",
+                  background: "none",
+                }}
+              >
+                <Avatar
+                  size={35}
+                  containerStyle="avatar-container"
+                  className="avatar-opened-nav mx-3"
+                  ref={ref}
+                  // onClick={() => {
+                  //   handleClick();
+                  //   //navigate("/profile");
+                  // }}
+                />
+              </button>
+            </OverlayTrigger>
+          </div>
         ) : (
           <div className="menu-login-container">
             <button

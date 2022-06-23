@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Formik, Form, useFormik } from "formik";
-import { useLogin } from "../../queries/auth.query";
+import { useLogin } from "../../queries/auth/auth.query";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -24,8 +24,9 @@ const Login = (props) => {
 
   useEffect(() => {
     if (data && data.status) {
-      auth.setIsAuthenticated(true);
       auth.setToken(data.token);
+      auth.setUserInfo({ ...data.user });
+      auth.setIsAuthenticated(true);
       navigate(from, { replace: true });
     }
   }, [data, auth, navigate, from]);
