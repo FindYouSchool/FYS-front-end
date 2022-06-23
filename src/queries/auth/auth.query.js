@@ -9,7 +9,7 @@ export const useLogin = (credentials) => {
     async () => await login(credentials),
     {
       enabled: false,
-      suspense: true,
+      retry: 1,
     }
   );
 };
@@ -25,7 +25,7 @@ export const useSignUp = (credentials) => {
     async () => await signUp(credentials),
     {
       enabled: false,
-      suspense: true,
+      retry: 1,
     }
   );
 };

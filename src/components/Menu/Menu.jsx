@@ -71,10 +71,9 @@ const Menu = () => {
                   containerStyle="avatar-container"
                   className="avatar-opened-nav mx-3"
                   ref={ref}
-                  // onClick={() => {
-                  //   handleClick();
-                  //   //navigate("/profile");
-                  // }}
+                  onClick={() => {
+                    handleClick();
+                  }}
                 />
               </button>
             </OverlayTrigger>

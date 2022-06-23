@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, useFormik } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-
+import { toast } from "react-toastify";
 import "./signup.css";
 import { useSignUp } from "../../queries/auth/auth.query";
 import { useAuth } from "../../contexts/AuthContext";
@@ -28,9 +28,24 @@ const SignupSchema = Yup.object().shape({
 });
 
 const SignUp = () => {
-  const { refetch } = useSignUp();
+  const { refetch, isError, error } = useSignUp();
   const { setUserInfo, setIsAuthenticated, setToken } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(error);
+    if (isError) {
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }, [isError, error]);
 
   const formik = useFormik({
     initialValues: {
@@ -40,14 +55,18 @@ const SignUp = () => {
       passwordConfirmation: "",
     },
     onSubmit: (values) => {
-      refetch(values).then(({ data }) => {
-        if (data.data.user) {
-          setUserInfo({ ...data.data.user, roles: [1155] });
-          setToken(data.data.accessToken);
-          setIsAuthenticated(true);
-          navigate("/profile");
-        }
-      });
+      refetch(values)
+        .then(({ data }) => {
+          if (data && data.data.user) {
+            setUserInfo({ ...data.data.user, roles: [1155] });
+            setToken(data.data.accessToken);
+            setIsAuthenticated(true);
+            navigate("/profile");
+          }
+        })
+        .catch((err) => {
+          throw new Error(err);
+        });
     },
   });
   return (

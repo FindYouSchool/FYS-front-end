@@ -2,7 +2,6 @@ import { useField, ErrorMessage } from "formik";
 
 const InputField = ({ name, label, ...props }) => {
   const [field, meta] = useField(name);
-  console.log(meta);
   return (
     <>
       <label

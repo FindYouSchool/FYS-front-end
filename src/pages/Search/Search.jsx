@@ -8,7 +8,7 @@ import "./search.css";
 
 const Search = () => {
   const { search, filters } = useSearch();
-  const { data, refetch, isLoading, isError } = useSchools();
+  const { data, refetch, isLoading, isError, error } = useSchools();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,17 +21,20 @@ const Search = () => {
     refetch({ search, filters });
   }, [search, filters, refetch]);
 
-  if (isError) {
-    toast.error("Oups, erreur du serveur.", {
-      position: "top-right",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  }
+  useEffect(() => {
+    if (isError) {
+      toast.error(error.message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }, [isError, error]);
+
   if (isLoading) {
     return <Loader size="large" />;
   }

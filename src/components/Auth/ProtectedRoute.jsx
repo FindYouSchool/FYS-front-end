@@ -4,7 +4,6 @@ import { useAuth } from "../../contexts/AuthContext";
 const ProtectedRoute = ({ allowedRoles }) => {
   const { userInfo, isAuthenticated } = useAuth();
   const location = useLocation();
-  console.log(userInfo);
   return isAuthenticated &&
     userInfo?.roles?.find((role) => allowedRoles?.includes(role)) ? (
     <Outlet />

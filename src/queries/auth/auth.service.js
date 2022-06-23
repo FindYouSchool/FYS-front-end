@@ -8,7 +8,21 @@ export async function login(credentials) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(credentials),
-  }).then((data) => data.json());
+  })
+    .then(async (res) => {
+      const data = await res.json();
+      console.log(data);
+      if (!data.success) {
+        if (data.status === 500) {
+          throw new Error("Oups, erreur du serveur.");
+        }
+        throw new Error(data.message);
+      }
+      return data;
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
 }
 export async function logout() {
   return fetch(`${getEnvVariable("REACT_APP_AUTH_ENDPOINT")}/logout`, {
@@ -17,7 +31,17 @@ export async function logout() {
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((data) => data.json());
+  })
+    .then(async (res) => {
+      if (!res.status === 200) {
+        throw new Error(res.data?.message);
+      }
+
+      return await res.json();
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
 }
 
 export async function signUp(credentials) {
@@ -28,5 +52,19 @@ export async function signUp(credentials) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(credentials),
-  }).then((data) => data.json());
+  })
+    .then(async (res) => {
+      const data = await res.json();
+      if (!data.success) {
+        if (data.status === 500) {
+          throw new Error("Oups, erreur du serveur.");
+        }
+        throw new Error(data.message);
+      }
+
+      return data;
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
 }
