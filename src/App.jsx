@@ -12,6 +12,7 @@ const NotFound = lazy(() => import("./pages/404/NotFound"));
 const SignUp = lazy(() => import("./pages/SignUp/SignUp"));
 const Search = lazy(() => import("./pages/Search/Search"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
+const SchoolSheet = lazy(() => import("./pages/SchoolSheet/SchoolSheet"));
 //COMPONENTS
 const Menu = lazy(() => import("./components/Menu/Menu"));
 const Loader = lazy(() => import("./components/Loader/Loader"));
@@ -30,10 +31,11 @@ function App() {
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/search" element={<Search />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/school" element={<SchoolSheet />} />
               <Route element={<ProtectedRoute allowedRoles={[ROLES.USER]} />}>
                 <Route path="/profile" element={<Profile />} />
               </Route>
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
           <ToastContainer
