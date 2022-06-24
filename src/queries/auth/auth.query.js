@@ -9,7 +9,6 @@ export const useLogin = (credentials) => {
     async () => await login(credentials),
     {
       enabled: false,
-      retry: 1,
     }
   );
 };

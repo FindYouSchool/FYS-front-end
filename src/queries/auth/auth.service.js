@@ -7,11 +7,11 @@ export async function login(credentials) {
     headers: {
       "Content-Type": "application/json",
     },
+
     body: JSON.stringify(credentials),
   })
     .then(async (res) => {
       const data = await res.json();
-      console.log(data);
       if (!data.success) {
         if (data.status === 500) {
           throw new Error("Oups, erreur du serveur.");
@@ -44,6 +44,7 @@ export async function logout() {
 }
 
 export async function signUp(credentials) {
+  console.log(credentials);
   return fetch(`${getEnvVariable("REACT_APP_AUTH_ENDPOINT")}/register`, {
     method: "POST",
     // credentials: "include",
