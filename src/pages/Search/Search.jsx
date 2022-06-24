@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import Loader from "../../components/Loader/Loader";
 import { useSearch } from "../../contexts/SearchContext";
-import { useSchools } from "../../queries/schools/schools.query";
+import { useSchoolSearch } from "../../queries/schools/schools.query";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "./search.css";
+import CardGrid from "../../components/CardGrid/CardGrid";
 
 const Search = () => {
   const { search, filters } = useSearch();
-  const { data, refetch, isLoading, isError, error } = useSchools();
+  const { data, refetch, isLoading, isError, error } = useSchoolSearch({
+    search,
+    filters,
+  });
   const navigate = useNavigate();
+
+  console.log(data);
 
   useEffect(() => {
     if (search === "") {
@@ -18,7 +24,7 @@ const Search = () => {
   });
 
   useEffect(() => {
-    refetch({ search, filters });
+    refetch();
   }, [search, filters, refetch]);
 
   useEffect(() => {
@@ -48,7 +54,9 @@ const Search = () => {
   return (
     <div className="container py-4 w-100 text-center">
       <h1>Resultat pour : {search}</h1>
-      <p>{JSON.stringify(data)}</p>
+      <div className="container my-5 text-center ">
+        <CardGrid schools={data && data} />
+      </div>
     </div>
   );
 };

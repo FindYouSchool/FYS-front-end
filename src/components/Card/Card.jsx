@@ -1,15 +1,18 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
+import { useSchoolCTX } from "../../contexts/SchoolContext";
 import { useRate } from "../../queries/schools/schools.query";
 import Loader from "../Loader/Loader";
 import "./card.css";
 
 const Card = ({ school }) => {
   const navigate = useNavigate();
+  const { setSchool } = useSchoolCTX();
   const { data: rate, isLoading } = useRate(school.id);
   const handleClick = () => {
-    navigate("/school", { state: school });
+    setSchool(school);
+    navigate("/school/overview");
   };
   if (isLoading) {
     return <Loader />;

@@ -8,12 +8,7 @@ const SchoolOverview = () => {
   return (
     <div className="container my-5">
       <h2>Qui somme-nous ?</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam nemo
-        itaque placeat nostrum mollitia natus perspiciatis qui velit voluptatum
-        in debitis laborum, magnam, quidem molestias explicabo rerum odio quae
-        quos?
-      </p>
+      <p>{school?.description}</p>
       <h2 className="mt-5 mb-3">Plan d'acces au campus</h2>
       <MapContainer
         style={{ width: "100%", height: "400px", borderRadius: "10px" }}

@@ -1,0 +1,35 @@
+.notice-container {
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.397);
+  display: flex;
+  align-items: flex-start;
+  margin-top: 10px;
+  min-height: 300px;
+  flex-direction: column;
+}
+.notice-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #3a3a3a7c;
+}
+.author-info {
+  display: flex;
+  align-items: center;
+}
+.notice-author {
+  color: #3a3a3a;
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin-left: 1rem;
+}
+.notice-comment {
+  color: #3a3a3a;
+  font-weight: 300;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+}

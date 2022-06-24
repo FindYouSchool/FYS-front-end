@@ -23,25 +23,23 @@ export async function fetchSchools({ params, token }) {
       throw new Error(err);
     });
 }
-export async function fetchSchoolByName({ schoolName, token }) {
+export async function fetchSchoolByName({ filters, search }) {
   return fetch(
-    `${getEnvVariable(
-      "REACT_APP_BACKEND_ENDPOINT"
-    )}/public/schools/${schoolName}`,
+    `${getEnvVariable("REACT_APP_BACKEND_ENDPOINT")}/public/schools/${search}`,
     {
       method: "GET",
-      // credentials: "include",
-      headers: { Authorization: "Bearer " + token },
     }
   )
     .then(async (res) => {
       const content = await res.json();
-      if (!content.data || !content.data.id) {
+      console.log(content.data);
+      if (!content.data) {
         throw new Error("Oups, erreur du serveur.");
       }
-      return content.data;
+      return content.data.schools;
     })
     .catch((err) => {
+      console.log(err);
       throw new Error(err);
     });
 }
@@ -60,6 +58,26 @@ export async function fetchRateByID(id) {
         throw new Error("Oups, erreur du serveur.");
       }
       return content.data.rating;
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
+}
+export async function fetchNoticeBySchoolID(id) {
+  return fetch(
+    `${getEnvVariable(
+      "REACT_APP_BACKEND_ENDPOINT"
+    )}/public/notices/school/${id}`,
+    {
+      method: "GET",
+    }
+  )
+    .then(async (res) => {
+      const content = await res.json();
+      if (!content.data) {
+        throw new Error("Oups, erreur du serveur.");
+      }
+      return content.data.notices;
     })
     .catch((err) => {
       throw new Error(err);

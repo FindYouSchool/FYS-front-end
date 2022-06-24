@@ -19,13 +19,15 @@
   margin-bottom: 30px;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 .school-infos {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
   width: 100%;
+  padding-left: 20px;
 }
 .school-title {
   color: white;
@@ -33,12 +35,12 @@
   font-size: 2rem;
   position: relative;
   top: 10px;
-  left: 20px;
 }
 .school-logo {
   border-radius: 50%;
   margin-right: 5px;
   width: 70px;
+  height: 70px;
   background: white;
 }
 
