@@ -1,11 +1,22 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
+import { useNavigate } from "react-router-dom";
+import { useRate } from "../../queries/schools/schools.query";
+import Loader from "../Loader/Loader";
 import "./card.css";
 
 const Card = ({ school }) => {
-  console.log(school.logo);
+  const navigate = useNavigate();
+  const { data: rate, isLoading } = useRate(school.id);
+  const handleClick = () => {
+    navigate("/school", { state: school });
+  };
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="card-container">
+    <div onClick={handleClick} className="card-container">
       <div className="card-header">
         <div className="card-overlay">
           <img src={school.logo} className="card-logo" alt="" />
@@ -13,7 +24,7 @@ const Card = ({ school }) => {
             edit={false}
             onChange={() => {}}
             count={5}
-            value={school.rating}
+            value={parseInt(rate)}
             emptyIcon={<i className="far fa-star"></i>}
             halfIcon={<i className="fa fa-star-half-alt"></i>}
             fullIcon={<i className="fa fa-star"></i>}

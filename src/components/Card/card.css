@@ -54,8 +54,14 @@
   font-weight: 500;
   font-size: 1.2rem;
 }
-.card-descriptio {
+.card-description {
   color: #3a3a3a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 @media screen and (max-width: 800px) {

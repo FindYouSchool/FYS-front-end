@@ -1,6 +1,10 @@
 import { useQuery } from "react-query";
 import { useAuth } from "../../contexts/AuthContext";
-import { fetchSchoolByName, fetchSchools } from "./schools.service";
+import {
+  fetchRateByID,
+  fetchSchoolByName,
+  fetchSchools,
+} from "./schools.service";
 
 export const useSchools = (params) => {
   const { token } = useAuth();
@@ -16,5 +20,11 @@ export const useSchool = (schoolName) => {
     ["school", schoolName],
     async () =>
       await fetchSchoolByName({ schoolName, token }, { enable: false })
+  );
+};
+export const useRate = (id) => {
+  return useQuery(
+    ["school-rate", id],
+    async () => await fetchRateByID(id, { enable: false })
   );
 };
