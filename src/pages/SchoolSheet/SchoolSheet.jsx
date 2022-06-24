@@ -45,11 +45,10 @@ const SchoolSheet = () => {
       <div className="school-header">
         <div className="school-header-overlay">
           <div className="school-infos-container">
-            <img src={school.logo} className="school-logo" alt="" />
+            <img src={school.logo} className="school-logo" alt="school logo" />
             <div className="school-infos">
               <h3 className="school-title">{school.name}</h3>
               <ReactStars
-                style={{ marginLeft: "-50px" }}
                 edit={false}
                 onChange={() => {}}
                 count={5}

@@ -1,0 +1,23 @@
+.cardgrid-container {
+  padding-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-content: center;
+  grid-gap: 30px;
+  width: 100%;
+}
+@media screen and (max-width: 1250px) {
+  .cardgrid-container {
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+  }
+}
+@media screen and (max-width: 800px) {
+  .cardgrid-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
