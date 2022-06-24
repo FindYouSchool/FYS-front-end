@@ -45,6 +45,7 @@ function App() {
               <Route element={<ProtectedRoute allowedRoles={[ROLES.USER]} />}>
                 <Route path="/profile" element={<Profile />} />
               </Route>
+
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

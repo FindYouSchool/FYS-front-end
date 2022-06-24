@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { Navigate, NavLink, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader/Loader";
 import ReactStars from "react-rating-stars-component";
-import { useSchool } from "../../queries/schools/schools.query";
 import "./schoolsheet.css";
+import { useSchoolCTX } from "../../contexts/SchoolContext";
+import { useRate } from "../../queries/schools/schools.query";
 const SchoolSheet = () => {
-  const { data: school, isLoading, isError, error } = useSchool();
+  const { school } = useSchoolCTX();
+  const { data: rate, isLoading, isError, error } = useRate(school.id);
   const [activeTabItem, setActiveTabItem] = useState();
   const tabItems = [
     { id: 1, pathname: "overview", text: "Présentation" },
@@ -14,7 +16,8 @@ const SchoolSheet = () => {
     { id: 3, pathname: "education", text: "Formation" },
     { id: 4, pathname: "contact", text: "Contact" },
   ];
-  const handleTabClick = (event, id) => {
+
+  const handleTabClick = (id) => {
     setActiveTabItem(id);
   };
   useEffect(() => {
@@ -30,10 +33,14 @@ const SchoolSheet = () => {
       });
     }
   }, [isError, error]);
+  if (!school.id) {
+    return <Navigate to="/" />;
+  }
+
   if (isLoading) {
     return <Loader size="large" />;
   }
-  if (!school.id) {
+  if (!school || !school.id) {
     return (
       <div className="container">
         <h2>Erreur lors du chargement des informations de l'école.</h2>
@@ -45,14 +52,14 @@ const SchoolSheet = () => {
       <div className="school-header">
         <div className="school-header-overlay">
           <div className="school-infos-container">
-            <img src={school.logo} className="school-logo" alt="school logo" />
+            <img src={school?.logo} className="school-logo" alt="school logo" />
             <div className="school-infos">
-              <h3 className="school-title">{school.name}</h3>
+              <h3 className="school-title">{school?.name}</h3>
               <ReactStars
                 edit={false}
                 onChange={() => {}}
                 count={5}
-                value={school.rating}
+                value={rate && rate}
                 emptyIcon={<i className="far fa-star"></i>}
                 halfIcon={<i className="fa fa-star-half-alt"></i>}
                 fullIcon={<i className="fa fa-star"></i>}

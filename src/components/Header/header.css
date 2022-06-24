@@ -4,8 +4,9 @@
   max-height: 400px;
   text-align: center;
   color: white;
-  background-image: url("../../assets/header.png");
+  background-image: url("../../assets/header.jpg");
   background-size: cover;
+  background-position: center;
 }
 .header-overlay {
   background: rgba(54, 72, 135, 0.5);
