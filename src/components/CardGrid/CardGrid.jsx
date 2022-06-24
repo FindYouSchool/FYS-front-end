@@ -3,7 +3,6 @@ import Card from "../Card/Card";
 import "./cardgrid.css";
 
 const CardGrid = ({ schools }) => {
-  console.log(schools);
   if (!schools || schools.length === 0) {
     return <h3 className="mt-5">Aucune école n'a été trouvée.</h3>;
   }

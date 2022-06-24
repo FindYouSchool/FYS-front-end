@@ -13,11 +13,11 @@ export async function fetchSchools({ params, token }) {
     }
   )
     .then(async (res) => {
-      const data = await res.json();
-      if (!data.schools) {
+      const content = await res.json();
+      if (!content.data.schools) {
         throw new Error("Oups, erreur du serveur.");
       }
-      return data;
+      return content.data;
     })
     .catch((err) => {
       throw new Error(err);
@@ -35,11 +35,11 @@ export async function fetchSchoolByName({ schoolName, token }) {
     }
   )
     .then(async (res) => {
-      const data = await res.json();
-      if (!data.id) {
+      const content = await res.json();
+      if (!content.data || !content.data.id) {
         throw new Error("Oups, erreur du serveur.");
       }
-      return data;
+      return !content.data;
     })
     .catch((err) => {
       throw new Error(err);
