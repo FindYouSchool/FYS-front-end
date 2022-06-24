@@ -1,0 +1,71 @@
+.school-header {
+  width: 100%;
+  height: 40vh;
+  max-height: 450px;
+  background-image: url("https://pixabay.com/get/g8c95c525c9cdcca795b138d89cd79fa61c5b8bf799250f6338e9eb7ed84863ff9a90824129d2e73fe36a7d9de5d535935894a7cc8c42e4bb17587cec9b1550f3418db0acc700d081410ce127bbc7c0d2_1280.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.school-header-overlay {
+  background: rgba(54, 71, 135, 0.6);
+  width: 100%;
+  height: 40vh;
+  max-height: 450px;
+  display: flex;
+  align-items: flex-end;
+}
+.school-infos-container {
+  margin: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+.school-infos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+.school-title {
+  color: white;
+  font-weight: 400;
+  font-size: 2rem;
+  position: relative;
+  top: 10px;
+  left: 20px;
+}
+.school-logo {
+  border-radius: 50%;
+  margin-right: 5px;
+  width: 70px;
+  background: white;
+}
+
+.school-tab-container {
+  width: 100%;
+  border-bottom: 4px solid #d9d9d9;
+  display: flex;
+  justify-content: center;
+}
+.school-tab-menu {
+  margin: 0;
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.school-tab-item {
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 1rem;
+  color: #292929;
+}
+.school-tab-item.active {
+  border-bottom: 4px solid #2951e0;
+  color: #2951e0;
+}
+.school-tab-item:hover {
+  cursor: pointer;
+}

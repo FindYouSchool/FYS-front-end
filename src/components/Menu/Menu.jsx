@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -12,6 +12,7 @@ import AvatarPopover from "../Avatar/AvatarPopover";
 const Menu = () => {
   const { isAuthenticated } = useAuth();
   const [showLinks, setShowlinks] = useState(false);
+  const [isTransparent, setIsTransparent] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const ref = React.createRef();
@@ -23,9 +24,20 @@ const Menu = () => {
       setShowlinks(false);
     }
   };
+  useEffect(() => {
+    if (location.pathname.startsWith("/school/")) {
+      setIsTransparent("transparent");
+    } else {
+      setIsTransparent("");
+    }
+  }, [location.pathname, setIsTransparent]);
 
   return (
-    <nav className={`menu-container ${showLinks ? "show-nav" : "hide-nav"} `}>
+    <nav
+      className={`menu-container ${
+        showLinks ? "show-nav" : "hide-nav"
+      } ${isTransparent}`}
+    >
       <div onClick={() => navigate("/")} className="logo-container">
         <span>FYS</span>
       </div>

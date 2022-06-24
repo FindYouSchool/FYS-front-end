@@ -21,6 +21,12 @@
   background-color: #364887;
   color: rgb(249, 246, 246);
 }
+.menu-container.transparent {
+  background-color: #36478700;
+  color: rgb(249, 246, 246);
+  position: absolute;
+}
+
 .navbar-burger {
   width: 40px;
   height: 40px;
@@ -105,7 +111,7 @@
   .show-nav .navbar-links {
     width: 100vw;
     background-color: rgba(54, 71, 135, 0.7);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
     visibility: visible;
   }
   .hide-nav .navbar-links {

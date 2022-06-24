@@ -1,8 +1,12 @@
 import React, { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Providers from "./contexts/Providers";
 import { ToastContainer } from "react-toastify";
 import { ROLES } from "./constants/Auth";
+import SchoolOverview from "./pages/SchoolSheet/SchoolOverview/SchoolOverview";
+import SchoolNotice from "./pages/SchoolSheet/SchoolNotice/SchoolNotice";
+import SchoolEducation from "./pages/SchoolSheet/SchoolEducation/SchoolEducation";
+import SchoolContact from "./pages/SchoolSheet/SchoolContact/SchoolContact";
 
 // PAGES
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -31,7 +35,13 @@ function App() {
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/school" element={<SchoolSheet />} />
+              <Route path="/school" element={<SchoolSheet />}>
+                <Route path="" element={<Navigate to="/school/overview" />} />
+                <Route path="overview" element={<SchoolOverview />} />
+                <Route path="notice" element={<SchoolNotice />} />
+                <Route path="education" element={<SchoolEducation />} />
+                <Route path="contact" element={<SchoolContact />} />
+              </Route>
               <Route element={<ProtectedRoute allowedRoles={[ROLES.USER]} />}>
                 <Route path="/profile" element={<Profile />} />
               </Route>
