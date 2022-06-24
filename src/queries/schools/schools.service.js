@@ -39,7 +39,27 @@ export async function fetchSchoolByName({ schoolName, token }) {
       if (!content.data || !content.data.id) {
         throw new Error("Oups, erreur du serveur.");
       }
-      return !content.data;
+      return content.data;
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
+}
+export async function fetchRateByID(id) {
+  return fetch(
+    `${getEnvVariable(
+      "REACT_APP_BACKEND_ENDPOINT"
+    )}/public/schools/${id}/grade`,
+    {
+      method: "GET",
+    }
+  )
+    .then(async (res) => {
+      const content = await res.json();
+      if (!content.data || !content.data.id) {
+        throw new Error("Oups, erreur du serveur.");
+      }
+      return content.data.rating;
     })
     .catch((err) => {
       throw new Error(err);
